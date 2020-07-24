@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 29
@@ -23,14 +24,46 @@ android {
         }
     }
 }
-
+ext {
+     koin_version= "2.1.6"
+     room_version="2.2.5"
+     retrofit_version="2.9.0"
+     mockk_version="1.10.0"
+     gson_version="2.8.6"
+     viewmodel_version="2.2.0"
+     livedata_version="2.2.0"
+}
 dependencies {
+
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.3.0'
+    implementation 'androidx.core:core-ktx:1.3.1'
     implementation 'androidx.appcompat:appcompat:1.1.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    // Koin for Android
+    implementation "org.koin:koin-android:$koin_version"
+    // Koin Android Scope feature
+    implementation "org.koin:koin-android-scope:$koin_version"
+    // Koin Android ViewModel feature
+    implementation "org.koin:koin-android-viewmodel:$koin_version"
+
+    //Room persistence library
+    implementation "androidx.room:room-runtime:$room_version"
+    //Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:$room_version"
+
+    //Retofit-Networking library
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    //gson for parsing network responses
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    // ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$viewmodel_version"
+    // LiveData
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$livedata_version"
+    //MockK mocking library for testing
+    testImplementation "io.mockk:mockk:$mockk_version"
 
 }
